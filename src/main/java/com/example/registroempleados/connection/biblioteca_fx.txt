@@ -1,0 +1,30 @@
+create database biblioteca_fx;
+
+create table empleado (
+    id serial primary key,
+    nombres varchar(100) not null,
+    apellidos varchar(100) not null,
+    cedula varchar(16) not null unique,
+    correo varchar(50) not null unique,
+    telefono varchar(20) not null,
+    cargo varchar(50) not null,
+    departamento varchar(50) not null,
+    salario decimal(10,2) not null,
+    fecha_contratacion timestamp,
+    estado boolean
+);
+
+insert into empleado (nombres, apellidos, cedula, correo, telefono, cargo, departamento, salario, fecha_contratacion, estado) values
+('Carlos Eduardo', 'Mendoza Pérez', '001-150390-0012A', 'carlos.mendoza@empresa.com.ni', '8845-1203', 'Gerente General', 'Gerencia', 25000.00, '2018-03-15 08:00:00', true),
+('María José', 'López Gutiérrez', '001-220892-0034B', 'maria.lopez@empresa.com.ni', '8721-4560', 'Contadora', 'Finanzas', 14500.00, '2019-07-01 08:00:00', true),
+('Juan Pablo', 'Rodríguez Salazar', '281-100588-0007C', 'juan.rodriguez@empresa.com.ni', '8390-7712', 'Desarrollador', 'Tecnología', 16800.00, '2020-02-10 08:00:00', true),
+('Ana Lucía', 'Martínez Rivas', '001-051195-0021D', 'ana.martinez@empresa.com.ni', '8567-3345', 'Analista de RRHH', 'Recursos Humanos', 12000.00, '2021-05-24 08:00:00', true),
+('Luis Alberto', 'Torres Blandón', '441-300785-0003E', 'luis.torres@empresa.com.ni', '8123-9087', 'Administrador de BD', 'Tecnología', 18500.00, '2019-11-18 08:00:00', true),
+('Karla Vanessa', 'Hernández Ruiz', '001-120298-0045F', 'karla.hernandez@empresa.com.ni', '8654-2231', 'Asistente Administrativa', 'Administración', 9500.00, '2022-01-31 08:00:00', true),
+('José Manuel', 'Castillo Orozco', '081-250686-0016G', 'jose.castillo@empresa.com.ni', '8478-6609', 'Vendedor', 'Ventas', 10500.00, '2022-08-15 08:00:00', true),
+('Daniela Fernanda', 'Ortega Molina', '001-070993-0028H', 'daniela.ortega@empresa.com.ni', '8812-5574', 'Supervisora de Ventas', 'Ventas', 15200.00, '2020-09-07 08:00:00', true),
+('Roberto Antonio', 'Gómez Altamirano', '001-181080-0009J', 'roberto.gomez@empresa.com.ni', '8305-4418', 'Técnico de Soporte', 'Tecnología', 11000.00, '2023-04-03 08:00:00', false),
+('Sofía Alejandra', 'Navarro Cruz', '281-040197-0052K', 'sofia.navarro@empresa.com.ni', '8699-1126', 'Diseñadora Gráfica', 'Marketing', 13000.00, '2021-10-12 08:00:00', true);
+
+SELECT *
+FROM empleado;
