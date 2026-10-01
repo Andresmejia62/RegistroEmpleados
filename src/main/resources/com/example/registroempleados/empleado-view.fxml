@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="800.0" prefWidth="1000.0" spacing="18.0" styleClass="root-form" stylesheets="@empleado.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.registroempleados.controller.EmpleadoController">
+    <padding>
+        <Insets bottom="24.0" left="30.0" right="30.0" top="24.0" />
+    </padding>
+    <children>
+
+        <!-- Encabezado -->
+        <VBox spacing="2.0">
+            <children>
+                <Label styleClass="titulo" text="Registro de empleados">
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font></Label>
+                <Label styleClass="subtitulo" text="Complete los datos y presione Guardar" />
+            </children>
+        </VBox>
+
+        <!-- Formulario -->
+        <VBox styleClass="tarjeta">
+            <children>
+                <GridPane hgap="28.0" vgap="16.0">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="50.0" />
+                        <ColumnConstraints percentWidth="50.0" />
+                    </columnConstraints>
+                    <children>
+
+                        <VBox spacing="6.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <children>
+                                <Label styleClass="campo-label" text="Nombres" />
+                                <TextField fx:id="txtNombres" maxWidth="Infinity" promptText="Ej. Carlos Eduardo" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="6.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <children>
+                                <Label styleClass="campo-label" text="Apellidos" />
+                                <TextField fx:id="txtApellidos" maxWidth="Infinity" promptText="Ej. Mendoza Pérez" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="6.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                            <children>
+                                <Label styleClass="campo-label" text="Cédula" />
+                                <TextField fx:id="txtCedula" maxWidth="Infinity" promptText="001-010190-0001A" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="6.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <children>
+                                <Label styleClass="campo-label" text="Correo" />
+                                <TextField fx:id="txtCorreo" maxWidth="Infinity" promptText="usuario@empresa.com.ni" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="6.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                            <children>
+                                <Label styleClass="campo-label" text="Teléfono" />
+                                <TextField fx:id="txtTelefono" maxWidth="Infinity" promptText="8888-8888" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="6.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <children>
+                                <Label styleClass="campo-label" text="Salario" />
+                                <TextField fx:id="txtSalario" maxWidth="Infinity" promptText="0.00" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="6.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                            <children>
+                                <Label styleClass="campo-label" text="Cargo" />
+                                <ComboBox fx:id="cboCargo" maxWidth="Infinity" promptText="Seleccione un cargo" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="6.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                            <children>
+                                <Label styleClass="campo-label" text="Departamento" />
+                                <ComboBox fx:id="cboDepartamento" maxWidth="Infinity" promptText="Seleccione un departamento" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="6.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                            <children>
+                                <Label styleClass="campo-label" text="Fecha de contratación" />
+                                <DatePicker fx:id="dpFechaContratacion" maxWidth="Infinity" promptText="dd/mm/aaaa" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="6.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                            <children>
+                                <Label styleClass="campo-label" text="Estado" />
+                                <ComboBox fx:id="cboEstado" maxWidth="Infinity" promptText="Seleccione un estado" />
+                            </children>
+                        </VBox>
+
+                    </children>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+                </GridPane>
+
+                <HBox alignment="CENTER_RIGHT" spacing="12.0">
+                    <padding>
+                        <Insets top="20.0" />
+                    </padding>
+                    <children>
+                        <Button fx:id="btnLimpiar" onAction="#limpiarFormulario" prefHeight="40.0" prefWidth="130.0" styleClass="boton-secundario" text="Limpiar" />
+                        <Button fx:id="btnGuardar" defaultButton="true" onAction="#guardarEmpleado" prefHeight="40.0" prefWidth="130.0" styleClass="boton-primario" text="Guardar" />
+                        <Button fx:id="btnActualizar" onAction="#actualizarEmpleado" prefHeight="40.0" prefWidth="130.0" styleClass="boton-primario" text="Actualizar" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+
+        <!-- Tabla -->
+        <TableView fx:id="tableEmpleados" prefHeight="320.0" VBox.vgrow="ALWAYS">
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+            <placeholder>
+                <Label text="No hay empleados registrados" />
+            </placeholder>
+            <columns>
+                <TableColumn fx:id="colId" minWidth="40.0" prefWidth="50.0" text="Id" />
+                <TableColumn fx:id="colNombres" prefWidth="120.0" text="Nombres" />
+                <TableColumn fx:id="colApellidos" prefWidth="120.0" text="Apellidos" />
+                <TableColumn fx:id="colCedula" prefWidth="120.0" text="Cédula" />
+                <TableColumn fx:id="colCorreo" prefWidth="180.0" text="Correo" />
+                <TableColumn fx:id="colTelefono" prefWidth="100.0" text="Teléfono" />
+                <TableColumn fx:id="colCargo" prefWidth="110.0" text="Cargo" />
+                <TableColumn fx:id="colDepartamento" prefWidth="120.0" text="Departamento" />
+                <TableColumn fx:id="colSalario" prefWidth="90.0" style="-fx-alignment: CENTER-RIGHT;" text="Salario" />
+                <TableColumn fx:id="colFechaContratacion" prefWidth="130.0" text="Fecha contratación" />
+                <TableColumn fx:id="colEstado" prefWidth="80.0" text="Estado" />
+            </columns>
+        </TableView>
+
+    </children>
+</VBox>
