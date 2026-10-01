@@ -31,6 +31,24 @@ public class Empleado {
     public Empleado() {
     }
 
+    public Empleado(int id, String nombres, String apellidos, String cedula, String correo,
+                    String telefono, String cargo, String departamento, double salario,
+                    String fechaContratacion, String estado) {
+        this.id = String.valueOf(id);
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.cedula = cedula;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.cargo = cargo;
+        this.departamento = departamento;
+        this.salario = salario;
+        this.fecha_contratacion = fechaContratacion == null || fechaContratacion.isBlank()
+                ? null
+                : LocalDate.parse(fechaContratacion);
+        this.estado = "Activo".equalsIgnoreCase(estado);
+    }
+
     public Empleado(String id, String nombres, String apellidos, String cedula, String correo, String telefono, String cargo, String departamento, double salario, LocalDate fecha_contratacion, boolean estado) {
         this.id = id;
         this.nombres = nombres;
@@ -121,12 +139,24 @@ public class Empleado {
         return fecha_contratacion;
     }
 
+    public LocalDate getFechaContratacion() {
+        return fecha_contratacion;
+    }
+
     public void setFecha_contratacion(LocalDate fecha_contratacion) {
         this.fecha_contratacion = fecha_contratacion;
     }
 
+    public void setFechaContratacion(LocalDate fechaContratacion) {
+        this.fecha_contratacion = fechaContratacion;
+    }
+
     public boolean isEstado() {
         return estado;
+    }
+
+    public String getEstado() {
+        return estado ? "Activo" : "Inactivo";
     }
 
     public void setEstado(boolean estado) {
