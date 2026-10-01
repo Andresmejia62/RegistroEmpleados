@@ -28,3 +28,40 @@ insert into empleado (nombres, apellidos, cedula, correo, telefono, cargo, depar
 
 SELECT *
 FROM empleado;
+
+-- 1. Mostrar todos los empleados
+select * from empleado;
+
+-- 2. Mostrar únicamente nombres, apellidos y cargo
+select nombres, apellidos, cargo from empleado;
+
+-- 3. Mostrar empleados que pertenezcan a un departamento determinado
+select * from empleado
+where departamento = 'Tecnología';
+
+-- 4. Mostrar empleados cuyo salario sea mayor a un valor establecido
+select * from empleado
+where salario > 15000;
+
+-- 5. Ordenar los empleados por salario de mayor a menor
+select * from empleado
+order by salario desc;
+
+-- 6. Contar la cantidad total de empleados registrados
+select count(*) as total_empleados from empleado;
+
+-- 7. Obtener el salario promedio de los empleados
+select avg(salario) as salario_promedio from empleado;
+
+-- 8. Obtener la suma de todos los salarios
+select sum(salario) as suma_salarios from empleado;
+
+-- 9. Mostrar únicamente empleados que se encuentren activos
+select * from empleado
+where estado = true;
+
+-- 10. Agrupar empleados por departamento y mostrar cuántos pertenecen a cada uno
+select departamento, count(*) as cantidad_empleados
+from empleado
+group by departamento
+order by cantidad_empleados desc;
