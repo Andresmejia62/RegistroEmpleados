@@ -36,6 +36,7 @@ public class EmpleadoController {
     @FXML private DatePicker dpFechaContratacion;
     @FXML private ComboBox<String> cboEstado;
     @FXML private Button btnGuardar;
+    @FXML private Button btnActualizar;
     @FXML private Button btnLimpiar;
 
     private final ObservableList<Empleado> listaEmpleados = FXCollections.observableArrayList();
@@ -46,6 +47,7 @@ public class EmpleadoController {
         cboDepartamento.getItems().setAll("TI", "Recursos Humanos", "Finanzas", "Marketing");
         cboEstado.getItems().setAll("Activo", "Inactivo");
         configurarTabla();
+        tableEmpleados.setItems(listaEmpleados);
         limpiarFormulario();
         cargarEmpleados();
     }
@@ -79,6 +81,7 @@ public class EmpleadoController {
             }
 
             tableEmpleados.setItems(listaEmpleados);
+            System.out.println("Empleados cargados: " + listaEmpleados.size());
 
         } catch (SQLException ex) {
             System.out.println("Error al cargar empleados: " + ex.getMessage());
@@ -132,6 +135,49 @@ public class EmpleadoController {
         } catch (SQLException e) {
             e.printStackTrace();
             mostrarAlerta(Alert.AlertType.ERROR, "Error", "No se pudo guardar: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void actualizarEmpleado(javafx.event.ActionEvent event) {
+        Empleado seleccionado = tableEmpleados.getSelectionModel().getSelectedItem();
+        if (seleccionado == null) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Selección requerida", "Seleccione un empleado de la tabla para actualizar.");
+            return;
+        }
+
+        if (!validarCampos()) {
+            return;
+        }
+
+        String sql = "UPDATE empleado SET nombres = ?, apellidos = ?, cedula = ?, correo = ?, telefono = ?, "
+                + "cargo = ?, departamento = ?, salario = ?, fecha_contratacion = ?, estado = ? WHERE id = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, txtNombres.getText().trim());
+            statement.setString(2, txtApellidos.getText().trim());
+            statement.setString(3, txtCedula.getText().trim());
+            statement.setString(4, txtCorreo.getText().trim());
+            statement.setString(5, txtTelefono.getText().trim());
+            statement.setString(6, cboCargo.getValue());
+            statement.setString(7, cboDepartamento.getValue());
+            statement.setDouble(8, Double.parseDouble(txtSalario.getText().trim()));
+            statement.setTimestamp(9, Timestamp.valueOf(dpFechaContratacion.getValue().atStartOfDay()));
+            statement.setBoolean(10, "Activo".equals(cboEstado.getValue()));
+            statement.setInt(11, Integer.parseInt(seleccionado.getId()));
+
+            int filas = statement.executeUpdate();
+            if (filas > 0) {
+                mostrarAlerta(Alert.AlertType.INFORMATION, "Empleado actualizado", "Los datos han sido actualizados.");
+                limpiarFormulario();
+                cargarEmpleados();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            mostrarAlerta(Alert.AlertType.ERROR, "Error", "No se pudo actualizar: " + e.getMessage());
         }
     }
 

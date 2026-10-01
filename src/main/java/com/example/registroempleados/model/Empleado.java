@@ -3,6 +3,9 @@ package com.example.registroempleados.model;
 import javafx.fxml.FXML;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Empleado {
     @FXML
@@ -43,10 +46,25 @@ public class Empleado {
         this.cargo = cargo;
         this.departamento = departamento;
         this.salario = salario;
-        this.fecha_contratacion = fechaContratacion == null || fechaContratacion.isBlank()
-                ? null
-                : LocalDate.parse(fechaContratacion);
+        this.fecha_contratacion = parseFecha(fechaContratacion);
         this.estado = "Activo".equalsIgnoreCase(estado);
+    }
+
+    private static LocalDate parseFecha(String fechaContratacion) {
+        if (fechaContratacion == null || fechaContratacion.isBlank()) {
+            return null;
+        }
+
+        try {
+            return LocalDate.parse(fechaContratacion);
+        } catch (DateTimeParseException ignored) {
+            try {
+                return LocalDateTime.parse(fechaContratacion, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                        .toLocalDate();
+            } catch (DateTimeParseException ex) {
+                return null;
+            }
+        }
     }
 
     public Empleado(String id, String nombres, String apellidos, String cedula, String correo, String telefono, String cargo, String departamento, double salario, LocalDate fecha_contratacion, boolean estado) {
