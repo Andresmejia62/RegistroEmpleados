@@ -7,12 +7,10 @@ import java.sql.SQLException;
 public class DatabaseConnection{
 
     private static final String URL = "jdbc:postgresql://localhost:5432/biblioteca_fx";
-    private static final String USER = "andresmejia";
-    private static final String PASSWORD = "amejia62";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "123";
 
     private DatabaseConnection(){
-
-
 
     }
 

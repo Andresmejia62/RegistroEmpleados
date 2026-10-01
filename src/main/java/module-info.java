@@ -5,6 +5,8 @@ module com.example.registroempleados {
 
     opens com.example.registroempleados to javafx.fxml;
     opens com.example.registroempleados.controller to javafx.fxml;
+    opens com.example.registroempleados.model to javafx.base;
+
     exports com.example.registroempleados;
     exports com.example.registroempleados.controller;
 }
