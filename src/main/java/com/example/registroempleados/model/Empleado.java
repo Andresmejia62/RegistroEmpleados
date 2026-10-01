@@ -26,9 +26,12 @@ public class Empleado {
     @FXML
     private LocalDate fecha_contratacion;
     @FXML
-    private String estado;
+    private boolean estado;
 
-    public Empleado(String id, String nombres, String apellidos, String cedula, String correo, String telefono, String cargo, String departamento, double salario, LocalDate fecha_contratacion, String estado) {
+    public Empleado() {
+    }
+
+    public Empleado(String id, String nombres, String apellidos, String cedula, String correo, String telefono, String cargo, String departamento, double salario, LocalDate fecha_contratacion, boolean estado) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -66,20 +69,20 @@ public class Empleado {
         this.apellidos = apellidos;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
     public String getCedula() {
         return cedula;
     }
 
     public void setCedula(String cedula) {
         this.cedula = cedula;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getTelefono() {
@@ -122,11 +125,11 @@ public class Empleado {
         this.fecha_contratacion = fecha_contratacion;
     }
 
-    public String getEstado() {
+    public boolean isEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 }
